@@ -38,6 +38,7 @@
 			this.checkBoxShowSecondaries = new System.Windows.Forms.CheckBox();
 			this.checkBoxBolts = new System.Windows.Forms.CheckBox();
 			this.checkBoxCutsFittings = new System.Windows.Forms.CheckBox();
+			this.checkBoxShowComponents = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -127,11 +128,22 @@
 			this.checkBoxCutsFittings.Text = "Show Cuts/Fittings";
 			this.checkBoxCutsFittings.UseVisualStyleBackColor = true;
 			// 
+			// checkBoxShowComponents
+			// 
+			this.checkBoxShowComponents.AutoSize = true;
+			this.checkBoxShowComponents.Location = new System.Drawing.Point(233, 217);
+			this.checkBoxShowComponents.Name = "checkBoxShowComponents";
+			this.checkBoxShowComponents.Size = new System.Drawing.Size(147, 21);
+			this.checkBoxShowComponents.TabIndex = 24;
+			this.checkBoxShowComponents.Text = "Show Components";
+			this.checkBoxShowComponents.UseVisualStyleBackColor = true;
+			// 
 			// ShowParts
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(395, 341);
+			this.Controls.Add(this.checkBoxShowComponents);
 			this.Controls.Add(this.checkBoxCutsFittings);
 			this.Controls.Add(this.checkBoxBolts);
 			this.Controls.Add(this.checkBoxShowSecondaries);
@@ -163,6 +175,7 @@
 		private System.Windows.Forms.CheckBox checkBoxShowSecondaries;
 		private System.Windows.Forms.CheckBox checkBoxBolts;
 		private System.Windows.Forms.CheckBox checkBoxCutsFittings;
+		private System.Windows.Forms.CheckBox checkBoxShowComponents;
 	}
 }
 

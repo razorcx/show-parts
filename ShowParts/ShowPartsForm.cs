@@ -83,11 +83,11 @@ namespace ShowParts
 				names.Add(item.ToString());
 			}
 
-			var modelObjects = GetMainParts().Where(p => names.Contains(p.Name)).OfType<ModelObject>().ToList();
+			var modelObjects = GetMainParts().AsParallel().Where(p => names.Contains(p.Name)).OfType<ModelObject>().ToList();
 
 			if (checkBoxShowSecondaries.Checked)
 			{
-				var secondaries = modelObjects
+				var secondaries = modelObjects.AsParallel()
 					.Where(p => p is Part)
 					.SelectMany(p => ((Part)p).GetAssembly().GetSecondaries().OfType<ModelObject>())
 					.ToList();
@@ -97,7 +97,7 @@ namespace ShowParts
 
 			if (checkBoxBolts.Checked)
 			{
-				var bolts = modelObjects
+				var bolts = modelObjects.AsParallel()
 					.Where(p => p is Part)
 					.SelectMany(p => ((Part)p).GetBolts().ToAList<ModelObject>())
 					.ToList();
@@ -107,12 +107,24 @@ namespace ShowParts
 
 			if (checkBoxCutsFittings.Checked)
 			{
-				var booleans = modelObjects
+				var booleans = modelObjects.AsParallel()
 					.Where(p => p is Part)
 					.SelectMany(p => ((Part)p).GetBooleans().ToAList<ModelObject>())
 					.ToList();
 
 				modelObjects.AddRange(booleans);
+			}
+
+			if (checkBoxShowComponents.Checked)
+			{
+				var components = modelObjects.AsParallel()
+					.Where(p => p is Part)
+					.SelectMany(p => ((Part)p).GetComponents().ToAList<BaseComponent>())
+					.ToList();
+
+				var children = components.AsParallel().SelectMany(c => c.GetChildren().ToAList<Part>()).ToList();
+
+				modelObjects.AddRange(children);
 			}
 
 			var objects = new ArrayList(modelObjects);
